@@ -32,9 +32,9 @@ namespace Paonia_Backend.Controllers
         {
             try
             {
-                var result = datamodel.AddUpdateEmployeeDetails(req.Id, req.EmployeeId, req.firstName, req.middleName, req.lastname, req.DateofBirth, req.Age, req.JoiningDate, req.IdentificationNumberType,
-                                                     req.IdentificationNumber, req.Gender, req.password, req.PersonalEmailID, req.ContactNumber, req.CompanyEmailID, req.EmergencyContactName,
-                                                     req.EmergencyContactNumber, req.Designation, req.EmployeeType, req.IsActive);
+                var result = datamodel.AddUpdateEmployeeDetails(req.Id, req.EmployeeId, req.firstName, req.middleName, req.lastname, req.DateofBirth, req.Age, req.JoiningDate, 
+                                                      req.Gender, req.password, req.PersonalEmailID, req.ContactNumber, req.CompanyEmailID, req.EmergencyContactName,
+                                                     req.EmergencyContactNumber, req.EmergencyContactRelation, req.Designation, req.EmployeeType, req.IsActive);
 
                 var sc = Convert.ToInt32(result.StatusCode);
 

@@ -40,13 +40,7 @@ namespace Paonia_Backend.Databse
         [Display(Name = "JoiningDate")]
         public DateTime JoiningDate { get; set; }
 
-        [Required]
-        [Display(Name = "IdentificationNumberType")]
-        public string IdentificationNumberType { get; set; }
-
-        [Required]
-        [Display(Name = "IdentificationNumber")]
-        public string IdentificationNumber { get; set; }
+       
 
         [Required]
         [Display(Name = "Gender")]
@@ -76,6 +70,10 @@ namespace Paonia_Backend.Databse
 
         [Display(Name = "EmergencyContactNumber")]
         public string EmergencyContactNumber { get; set; }
+
+        
+        [Display(Name = "EmergencyContactRelation")]
+        public string EmergencyContactRelation { get; set; }
 
         [Required]
         [Display(Name = "Designation")]

@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8fbc0abdcccd43d0986b76c6317742ef" Name="Diagram1">
-        <EntityTypeShape EntityType="PaoniaModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PaoniaModel.EmployeeLeaf" Width="1.5" PointX="3" PointY="1.25" />
-        <AssociationConnector Association="PaoniaModel.FK__EmployeeL__Emplo__2E1BDC42" />
+        <EntityTypeShape EntityType="PaoniaModel.EmployeeLeaf" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="PaoniaModel.User" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="PaoniaModel.FK__EmployeeL__Emplo__4BAC3F29" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

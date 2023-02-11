@@ -28,8 +28,6 @@ namespace Paonia_Backend.Databse
         public Nullable<System.DateTime> DateofBirth { get; set; }
         public Nullable<int> Age { get; set; }
         public Nullable<System.DateTime> JoiningDate { get; set; }
-        public string IdentificationNumberType { get; set; }
-        public string IdentificationNumber { get; set; }
         public string Gender { get; set; }
         public string Password { get; set; }
         public string PersonalEmailID { get; set; }
@@ -37,6 +35,7 @@ namespace Paonia_Backend.Databse
         public string CompanyEmailID { get; set; }
         public string EmergencyContactName { get; set; }
         public string EmergencyContactNumber { get; set; }
+        public string EmergencyContactRelation { get; set; }
         public string Designation { get; set; }
         public string EmployeeType { get; set; }
         public string IsActive { get; set; }

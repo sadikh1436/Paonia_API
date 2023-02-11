@@ -27,10 +27,10 @@ namespace Paonia_Backend.Databse
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
-        public virtual int AddUpdateEmployeeDetails(Nullable<int> id, string employeeId, string firstName, string middleName, string lastname, Nullable<System.DateTime> dateofBirth, Nullable<int> age, Nullable<System.DateTime> joiningDate, string identificationNumberType, string identificationNumber, string gender, string password, string personalEmailID, string contactNumber, string companyEmailID, string emergencyContactName, string emergencyContactNumber, string designation, string employeeType, string isActive, ObjectParameter statusCode, ObjectParameter statusMessage)
+        public virtual int AddUpdateEmployeeDetails(Nullable<int> id, string employeeId, string firstName, string middleName, string lastname, Nullable<System.DateTime> dateofBirth, Nullable<int> age, Nullable<System.DateTime> joiningDate, string gender, string password, string personalEmailID, string contactNumber, string companyEmailID, string emergencyContactName, string emergencyContactNumber, string emergencyContactRelation, string designation, string employeeType, string isActive, ObjectParameter statusCode, ObjectParameter statusMessage)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -64,14 +64,6 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("JoiningDate", joiningDate) :
                 new ObjectParameter("JoiningDate", typeof(System.DateTime));
     
-            var identificationNumberTypeParameter = identificationNumberType != null ?
-                new ObjectParameter("IdentificationNumberType", identificationNumberType) :
-                new ObjectParameter("IdentificationNumberType", typeof(string));
-    
-            var identificationNumberParameter = identificationNumber != null ?
-                new ObjectParameter("IdentificationNumber", identificationNumber) :
-                new ObjectParameter("IdentificationNumber", typeof(string));
-    
             var genderParameter = gender != null ?
                 new ObjectParameter("Gender", gender) :
                 new ObjectParameter("Gender", typeof(string));
@@ -100,6 +92,10 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("EmergencyContactNumber", emergencyContactNumber) :
                 new ObjectParameter("EmergencyContactNumber", typeof(string));
     
+            var emergencyContactRelationParameter = emergencyContactRelation != null ?
+                new ObjectParameter("EmergencyContactRelation", emergencyContactRelation) :
+                new ObjectParameter("EmergencyContactRelation", typeof(string));
+    
             var designationParameter = designation != null ?
                 new ObjectParameter("Designation", designation) :
                 new ObjectParameter("Designation", typeof(string));
@@ -112,23 +108,10 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("IsActive", isActive) :
                 new ObjectParameter("IsActive", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateEmployeeDetails", idParameter, employeeIdParameter, firstNameParameter, middleNameParameter, lastnameParameter, dateofBirthParameter, ageParameter, joiningDateParameter, identificationNumberTypeParameter, identificationNumberParameter, genderParameter, passwordParameter, personalEmailIDParameter, contactNumberParameter, companyEmailIDParameter, emergencyContactNameParameter, emergencyContactNumberParameter, designationParameter, employeeTypeParameter, isActiveParameter, statusCode, statusMessage);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateEmployeeDetails", idParameter, employeeIdParameter, firstNameParameter, middleNameParameter, lastnameParameter, dateofBirthParameter, ageParameter, joiningDateParameter, genderParameter, passwordParameter, personalEmailIDParameter, contactNumberParameter, companyEmailIDParameter, emergencyContactNameParameter, emergencyContactNumberParameter, emergencyContactRelationParameter, designationParameter, employeeTypeParameter, isActiveParameter, statusCode, statusMessage);
         }
     
-        public virtual ObjectResult<Login_Result> Login(string employeeId, string password)
-        {
-            var employeeIdParameter = employeeId != null ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", employeeIdParameter, passwordParameter);
-        }
-    
-        public virtual int AddUpdateEmployeeLeaveRequest(Nullable<int> id, string employeeId, string firstName, string middleName, string lastName, string senderEmailID, string password, string phoneNumber, string receiverName, string receiverEmailID, Nullable<System.DateTime> leaveStart, Nullable<System.DateTime> leaveEnd, string leaveType, string description, string status, ObjectParameter statusCode, ObjectParameter statusMessage)
+        public virtual int AddUpdateEmployeeLeaveRequest(Nullable<int> id, string employeeId, string senderEmailID, string password, string phoneNumber, string receiverName, string receiverEmailID, Nullable<System.DateTime> leaveStart, Nullable<System.DateTime> leaveEnd, string leaveType, string description, string status, ObjectParameter statusCode, ObjectParameter statusMessage)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -137,18 +120,6 @@ namespace Paonia_Backend.Databse
             var employeeIdParameter = employeeId != null ?
                 new ObjectParameter("EmployeeId", employeeId) :
                 new ObjectParameter("EmployeeId", typeof(string));
-    
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var middleNameParameter = middleName != null ?
-                new ObjectParameter("MiddleName", middleName) :
-                new ObjectParameter("MiddleName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
     
             var senderEmailIDParameter = senderEmailID != null ?
                 new ObjectParameter("SenderEmailID", senderEmailID) :
@@ -190,7 +161,7 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("Status", status) :
                 new ObjectParameter("Status", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateEmployeeLeaveRequest", idParameter, employeeIdParameter, firstNameParameter, middleNameParameter, lastNameParameter, senderEmailIDParameter, passwordParameter, phoneNumberParameter, receiverNameParameter, receiverEmailIDParameter, leaveStartParameter, leaveEndParameter, leaveTypeParameter, descriptionParameter, statusParameter, statusCode, statusMessage);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateEmployeeLeaveRequest", idParameter, employeeIdParameter, senderEmailIDParameter, passwordParameter, phoneNumberParameter, receiverNameParameter, receiverEmailIDParameter, leaveStartParameter, leaveEndParameter, leaveTypeParameter, descriptionParameter, statusParameter, statusCode, statusMessage);
         }
     
         public virtual ObjectResult<GetAllEmployees_Result> GetAllEmployees(Nullable<int> id)
@@ -227,6 +198,19 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("Designation", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLeaveReceiverList_Result>("GetLeaveReceiverList", designationParameter);
+        }
+    
+        public virtual ObjectResult<Login_Result> Login(string employeeId, string password)
+        {
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", employeeIdParameter, passwordParameter);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace Paonia_Backend.Databse.DataModel
         PaoniaEntities PE = new PaoniaEntities();
 
         public ResponseObject AddUpdateEmployeeDetails(int? Id, string EmployeeId, string firstName, string middleName, string lastname, DateTime dateofBirth,
-                                          int? age, DateTime joiningDate, string identificationNumberType, string identificationNumber, string Gender, string password, string personalEmailID,
-                                          string contactNumber, string companyEmailID, string emergencyContactName, string emergencyContactNumber,
+                                          int? age, DateTime joiningDate, string Gender, string password, string personalEmailID,
+                                          string contactNumber, string companyEmailID, string emergencyContactName, string emergencyContactNumber, string emergencyContactRelation,
                                           string designation, string employeeType, string IsActive)
         {
             try
@@ -21,8 +21,8 @@ namespace Paonia_Backend.Databse.DataModel
                 ObjectParameter statusCode = new ObjectParameter("StatusCode", typeof(int));
                 ObjectParameter statusMessage = new ObjectParameter("StatusMessage", typeof(string));
 
-                PE.AddUpdateEmployeeDetails(Id, EmployeeId, firstName, middleName, lastname, dateofBirth, age, joiningDate, identificationNumberType, identificationNumber,
-                    Gender, password, personalEmailID, contactNumber, companyEmailID, emergencyContactName, emergencyContactNumber, designation,
+                PE.AddUpdateEmployeeDetails(Id, EmployeeId, firstName, middleName, lastname, dateofBirth, age, joiningDate,
+                    Gender, password, personalEmailID, contactNumber, companyEmailID, emergencyContactName, emergencyContactNumber, emergencyContactRelation, designation,
                     employeeType, IsActive, statusCode, statusMessage);
 
                 var sc = Convert.ToInt32(statusCode.Value.ToString());
@@ -51,7 +51,7 @@ namespace Paonia_Backend.Databse.DataModel
                 ObjectParameter statusCode = new ObjectParameter("StatusCode", typeof(int));
                 ObjectParameter statusMessage = new ObjectParameter("StatusMessage", typeof(string));
 
-                PE.AddUpdateEmployeeLeaveRequest(Id, EmployeeId, firstName, middleName, lastname,  SenderEmailID, Password, PhoneNumber, ReceiverName, ReceiverEmailID,
+                PE.AddUpdateEmployeeLeaveRequest(Id, EmployeeId, SenderEmailID, Password, PhoneNumber, ReceiverName, ReceiverEmailID,
                     LeaveStart, LeaveEnd, LeaveType, Description, Status, statusCode, statusMessage);
 
                 var sc = Convert.ToInt32(statusCode.Value.ToString());

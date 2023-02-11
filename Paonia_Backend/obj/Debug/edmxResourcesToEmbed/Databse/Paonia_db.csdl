@@ -1,33 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PaoniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="EmployeeId" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EmployeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="DateofBirth" Type="DateTime" Precision="0" />
-    <Property Name="Age" Type="Int32" />
-    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
-    <Property Name="IdentificationNumberType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="IdentificationNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="PersonalEmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="ContactNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="CompanyEmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="EmergencyContactName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="EmergencyContactNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="EmployeeType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="IsActive" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="EmployeeLeaves" Relationship="PaoniaModel.FK__EmployeeL__Emplo__2E1BDC42" FromRole="User" ToRole="EmployeeLeaf" />
-  </EntityType>
   <EntityContainer Name="PaoniaEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="EmployeeLeaves" EntityType="PaoniaModel.EmployeeLeaf" />
+    <EntitySet Name="Users" EntityType="PaoniaModel.User" />
+    <AssociationSet Name="FK__EmployeeL__Emplo__4BAC3F29" Association="PaoniaModel.FK__EmployeeL__Emplo__4BAC3F29">
+      <End Role="User" EntitySet="Users" />
+      <End Role="EmployeeLeaf" EntitySet="EmployeeLeaves" />
+    </AssociationSet>
     <FunctionImport Name="AddUpdateEmployeeDetails">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="String" />
@@ -37,8 +16,6 @@
       <Parameter Name="DateofBirth" Mode="In" Type="DateTime" />
       <Parameter Name="Age" Mode="In" Type="Int32" />
       <Parameter Name="JoiningDate" Mode="In" Type="DateTime" />
-      <Parameter Name="IdentificationNumberType" Mode="In" Type="String" />
-      <Parameter Name="IdentificationNumber" Mode="In" Type="String" />
       <Parameter Name="Gender" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
       <Parameter Name="PersonalEmailID" Mode="In" Type="String" />
@@ -46,27 +23,16 @@
       <Parameter Name="CompanyEmailID" Mode="In" Type="String" />
       <Parameter Name="EmergencyContactName" Mode="In" Type="String" />
       <Parameter Name="EmergencyContactNumber" Mode="In" Type="String" />
+      <Parameter Name="EmergencyContactRelation" Mode="In" Type="String" />
       <Parameter Name="Designation" Mode="In" Type="String" />
       <Parameter Name="EmployeeType" Mode="In" Type="String" />
       <Parameter Name="IsActive" Mode="In" Type="String" />
       <Parameter Name="StatusCode" Mode="InOut" Type="Int32" />
       <Parameter Name="StatusMessage" Mode="InOut" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Login" ReturnType="Collection(PaoniaModel.Login_Result)">
-      <Parameter Name="EmployeeId" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="EmployeeLeaves" EntityType="PaoniaModel.EmployeeLeaf" />
-    <AssociationSet Name="FK__EmployeeL__Emplo__2E1BDC42" Association="PaoniaModel.FK__EmployeeL__Emplo__2E1BDC42">
-      <End Role="User" EntitySet="Users" />
-      <End Role="EmployeeLeaf" EntitySet="EmployeeLeaves" />
-    </AssociationSet>
     <FunctionImport Name="AddUpdateEmployeeLeaveRequest">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="String" />
-      <Parameter Name="FirstName" Mode="In" Type="String" />
-      <Parameter Name="MiddleName" Mode="In" Type="String" />
-      <Parameter Name="LastName" Mode="In" Type="String" />
       <Parameter Name="SenderEmailID" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
       <Parameter Name="PhoneNumber" Mode="In" Type="String" />
@@ -92,36 +58,17 @@
     <FunctionImport Name="GetLeaveReceiverList" ReturnType="Collection(PaoniaModel.GetLeaveReceiverList_Result)">
       <Parameter Name="Designation" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Login" ReturnType="Collection(PaoniaModel.Login_Result)">
+      <Parameter Name="EmployeeId" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="Login_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="767" />
-    <Property Type="DateTime" Name="DateofBirth" Nullable="true" />
-    <Property Type="Int32" Name="Age" Nullable="true" />
-    <Property Type="DateTime" Name="JoiningDate" Nullable="true" />
-    <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="IdentificationNumberType" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="IdentificationNumber" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="PersonalEmailID" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="CompanyEmailID" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="EmergencyContactName" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="EmergencyContactNumber" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
-  </ComplexType>
   <EntityType Name="EmployeeLeaf">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="SenderEmailID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -132,9 +79,34 @@
     <Property Name="LeaveType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="User" Relationship="PaoniaModel.FK__EmployeeL__Emplo__2E1BDC42" FromRole="EmployeeLeaf" ToRole="User" />
+    <NavigationProperty Name="User" Relationship="PaoniaModel.FK__EmployeeL__Emplo__4BAC3F29" FromRole="EmployeeLeaf" ToRole="User" />
   </EntityType>
-  <Association Name="FK__EmployeeL__Emplo__2E1BDC42">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PersonalEmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyEmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyContactName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyContactNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyContactRelation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmployeeLeaves" Relationship="PaoniaModel.FK__EmployeeL__Emplo__4BAC3F29" FromRole="User" ToRole="EmployeeLeaf" />
+  </EntityType>
+  <Association Name="FK__EmployeeL__Emplo__4BAC3F29">
     <End Type="PaoniaModel.User" Role="User" Multiplicity="1" />
     <End Type="PaoniaModel.EmployeeLeaf" Role="EmployeeLeaf" Multiplicity="*" />
     <ReferentialConstraint>
@@ -156,14 +128,13 @@
     <Property Type="Int32" Name="Age" Nullable="true" />
     <Property Type="DateTime" Name="JoiningDate" Nullable="true" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="IdentificationNumberType" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="IdentificationNumber" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="PersonalEmailID" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="CompanyEmailID" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="EmergencyContactName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="EmergencyContactNumber" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactRelation" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
@@ -171,9 +142,6 @@
   <ComplexType Name="GetEmployeeLeavesListByEmpId_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="SenderEmailID" Nullable="false" MaxLength="255" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
@@ -188,9 +156,6 @@
   <ComplexType Name="GetEmployeeLeavesListById_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="SenderEmailID" Nullable="false" MaxLength="255" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
@@ -211,6 +176,25 @@
     <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="CompanyEmailID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="Login_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="767" />
+    <Property Type="DateTime" Name="DateofBirth" Nullable="true" />
+    <Property Type="Int32" Name="Age" Nullable="true" />
+    <Property Type="DateTime" Name="JoiningDate" Nullable="true" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PersonalEmailID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CompanyEmailID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactNumber" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactRelation" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
