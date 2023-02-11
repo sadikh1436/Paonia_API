@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaoniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EmployeeLeaves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="255" />
+    <Property Name="LastName" Type="varchar" MaxLength="255" />
+    <Property Name="SenderEmailID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+    <Property Name="ReceiverName" Type="varchar" MaxLength="255" />
+    <Property Name="ReceiverEmailId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="LeaveStart" Type="date" />
+    <Property Name="LeaveEnd" Type="date" />
+    <Property Name="LeaveType" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="255" />
+    <Property Name="LastName" Type="varchar" MaxLength="255" />
+    <Property Name="DateofBirth" Type="date" />
+    <Property Name="Age" Type="int" />
+    <Property Name="JoiningDate" Type="date" />
+    <Property Name="IdentificationNumberType" Type="varchar" MaxLength="255" />
+    <Property Name="IdentificationNumber" Type="varchar" MaxLength="255" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="PersonalEmailID" Type="varchar" MaxLength="255" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="255" />
+    <Property Name="CompanyEmailID" Type="varchar" MaxLength="255" />
+    <Property Name="EmergencyContactName" Type="varchar" MaxLength="255" />
+    <Property Name="EmergencyContactNumber" Type="varchar" MaxLength="255" />
+    <Property Name="Designation" Type="varchar" MaxLength="200" />
+    <Property Name="EmployeeType" Type="varchar" MaxLength="255" />
+    <Property Name="IsActive" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__EmployeeL__Emplo__2E1BDC42">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="EmployeeLeaves" Type="Self.EmployeeLeaves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeLeaves">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddUpdateEmployeeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+    <Parameter Name="Lastname" Type="varchar" Mode="In" />
+    <Parameter Name="DateofBirth" Type="date" Mode="In" />
+    <Parameter Name="Age" Type="int" Mode="In" />
+    <Parameter Name="JoiningDate" Type="date" Mode="In" />
+    <Parameter Name="IdentificationNumberType" Type="varchar" Mode="In" />
+    <Parameter Name="IdentificationNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="PersonalEmailID" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="CompanyEmailID" Type="varchar" Mode="In" />
+    <Parameter Name="EmergencyContactName" Type="varchar" Mode="In" />
+    <Parameter Name="EmergencyContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Designation" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeType" Type="varchar" Mode="In" />
+    <Parameter Name="IsActive" Type="varchar" Mode="In" />
+    <Parameter Name="StatusCode" Type="int" Mode="InOut" />
+    <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="AddUpdateEmployeeLeaveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="SenderEmailID" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="ReceiverName" Type="varchar" Mode="In" />
+    <Parameter Name="ReceiverEmailID" Type="varchar" Mode="In" />
+    <Parameter Name="LeaveStart" Type="date" Mode="In" />
+    <Parameter Name="LeaveEnd" Type="date" Mode="In" />
+    <Parameter Name="LeaveType" Type="varchar" Mode="In" />
+    <Parameter Name="Description" Type="varchar" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="StatusCode" Type="int" Mode="InOut" />
+    <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="GetAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeLeavesListByEmpId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeLeavesListById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetLeaveReceiverList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Designation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="PaoniaModelStoreContainer">
+    <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EmployeeL__Emplo__2E1BDC42" Association="Self.FK__EmployeeL__Emplo__2E1BDC42">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="EmployeeLeaves" EntitySet="EmployeeLeaves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
