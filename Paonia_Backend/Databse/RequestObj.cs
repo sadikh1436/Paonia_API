@@ -98,20 +98,6 @@ namespace Paonia_Backend.Databse
 
         public string EmployeeId { get; set; }
 
-        [Required]
-        [Display(Name = "First name")]
-        public string firstName { get; set; }
-
-        [Required]
-        [Display(Name = "Middle name")]
-        public string middleName { get; set; }
-
-        [Required]
-        [Display(Name = "Last name")]
-        public string lastname { get; set; }
-
-        
-
         [DataType(DataType.EmailAddress)]
         [Display(Name = "SenderEmailID")]
         public string SenderEmailID { get; set; }
@@ -151,6 +137,60 @@ namespace Paonia_Backend.Databse
 
         [Display(Name = "Status")]
         public string Status { get; set; }
+
+    }
+
+
+    public class RoleReq
+    {
+
+        public int Id { get; set; }
+
+        public string RoleCode { get; set; }
+
+        [Required]
+        [Display(Name = "RoleName")]
+        public string RoleName { get; set; }
+
+        [Required]
+        [Display(Name = "RoleStatus")]
+        public string RoleStatus { get; set; }
+
+    }
+
+
+    public class LeavetypeReq
+    {
+
+        public int Id { get; set; }
+
+        public string LeaveTypeCode { get; set; }
+
+        [Required]
+        [Display(Name = "LeaveTypeName")]
+        public string LeaveTypeName { get; set; }
+
+        [Required]
+        [Display(Name = "LeaveTypeStatus")]
+        public string LeaveTypeStatus { get; set; }
+
+    }
+
+
+    public class EmptypeReq
+    {
+
+        public int Id { get; set; }
+
+        public string EmpTypeCode { get; set; }
+
+        [Required]
+        [Display(Name = "EmpTypeName")]
+        public string EmpTypeName { get; set; }
+
+        [Required]
+        [Display(Name = "EmpTypeStatus")]
+        public string EmpTypeStatus { get; set; }
 
     }
 

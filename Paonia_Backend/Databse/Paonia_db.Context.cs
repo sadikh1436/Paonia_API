@@ -29,6 +29,9 @@ namespace Paonia_Backend.Databse
     
         public virtual DbSet<EmployeeLeaf> EmployeeLeaves { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public virtual DbSet<LeaveType> LeaveTypes { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     
         public virtual int AddUpdateEmployeeDetails(Nullable<int> id, string employeeId, string firstName, string middleName, string lastname, Nullable<System.DateTime> dateofBirth, Nullable<int> age, Nullable<System.DateTime> joiningDate, string gender, string password, string personalEmailID, string contactNumber, string companyEmailID, string emergencyContactName, string emergencyContactNumber, string emergencyContactRelation, string designation, string employeeType, string isActive, ObjectParameter statusCode, ObjectParameter statusMessage)
         {
@@ -211,6 +214,105 @@ namespace Paonia_Backend.Databse
                 new ObjectParameter("Password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", employeeIdParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<GetEmployeeInfoById_Result> GetEmployeeInfoById(string employeeId)
+        {
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeeInfoById_Result>("GetEmployeeInfoById", employeeIdParameter);
+        }
+    
+        public virtual int AddUpdateEmpType(Nullable<int> id, string empTypeCode, string empTypeName, string empTypeStatus, ObjectParameter statusCode, ObjectParameter statusMessage)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var empTypeCodeParameter = empTypeCode != null ?
+                new ObjectParameter("EmpTypeCode", empTypeCode) :
+                new ObjectParameter("EmpTypeCode", typeof(string));
+    
+            var empTypeNameParameter = empTypeName != null ?
+                new ObjectParameter("EmpTypeName", empTypeName) :
+                new ObjectParameter("EmpTypeName", typeof(string));
+    
+            var empTypeStatusParameter = empTypeStatus != null ?
+                new ObjectParameter("EmpTypeStatus", empTypeStatus) :
+                new ObjectParameter("EmpTypeStatus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateEmpType", idParameter, empTypeCodeParameter, empTypeNameParameter, empTypeStatusParameter, statusCode, statusMessage);
+        }
+    
+        public virtual int AddUpdateLeaveType(Nullable<int> id, string leaveTypeCode, string leaveTypeName, string leaveTypeStatus, ObjectParameter statusCode, ObjectParameter statusMessage)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var leaveTypeCodeParameter = leaveTypeCode != null ?
+                new ObjectParameter("LeaveTypeCode", leaveTypeCode) :
+                new ObjectParameter("LeaveTypeCode", typeof(string));
+    
+            var leaveTypeNameParameter = leaveTypeName != null ?
+                new ObjectParameter("LeaveTypeName", leaveTypeName) :
+                new ObjectParameter("LeaveTypeName", typeof(string));
+    
+            var leaveTypeStatusParameter = leaveTypeStatus != null ?
+                new ObjectParameter("LeaveTypeStatus", leaveTypeStatus) :
+                new ObjectParameter("LeaveTypeStatus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateLeaveType", idParameter, leaveTypeCodeParameter, leaveTypeNameParameter, leaveTypeStatusParameter, statusCode, statusMessage);
+        }
+    
+        public virtual int AddUpdateRoles(Nullable<int> id, string roleCode, string roleName, string roleStatus, ObjectParameter statusCode, ObjectParameter statusMessage)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var roleCodeParameter = roleCode != null ?
+                new ObjectParameter("RoleCode", roleCode) :
+                new ObjectParameter("RoleCode", typeof(string));
+    
+            var roleNameParameter = roleName != null ?
+                new ObjectParameter("RoleName", roleName) :
+                new ObjectParameter("RoleName", typeof(string));
+    
+            var roleStatusParameter = roleStatus != null ?
+                new ObjectParameter("RoleStatus", roleStatus) :
+                new ObjectParameter("RoleStatus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUpdateRoles", idParameter, roleCodeParameter, roleNameParameter, roleStatusParameter, statusCode, statusMessage);
+        }
+    
+        public virtual ObjectResult<GetEmpTypesListById_Result> GetEmpTypesListById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmpTypesListById_Result>("GetEmpTypesListById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetLeaveTypesListById_Result> GetLeaveTypesListById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLeaveTypesListById_Result>("GetLeaveTypesListById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetRolesListById_Result> GetRolesListById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRolesListById_Result>("GetRolesListById", idParameter);
         }
     }
 }

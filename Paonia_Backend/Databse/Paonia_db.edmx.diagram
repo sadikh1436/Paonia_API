@@ -8,6 +8,9 @@
         <EntityTypeShape EntityType="PaoniaModel.EmployeeLeaf" Width="1.5" PointX="3" PointY="1.75" />
         <EntityTypeShape EntityType="PaoniaModel.User" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="PaoniaModel.FK__EmployeeL__Emplo__4BAC3F29" />
+        <EntityTypeShape EntityType="PaoniaModel.EmployeeType" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PaoniaModel.LeaveType" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PaoniaModel.Role" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

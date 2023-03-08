@@ -62,6 +62,45 @@
       <Parameter Name="EmployeeId" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetEmployeeInfoById" ReturnType="Collection(PaoniaModel.GetEmployeeInfoById_Result)">
+      <Parameter Name="EmployeeId" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="EmployeeTypes" EntityType="PaoniaModel.EmployeeType" />
+    <EntitySet Name="LeaveTypes" EntityType="PaoniaModel.LeaveType" />
+    <EntitySet Name="Roles" EntityType="PaoniaModel.Role" />
+    <FunctionImport Name="AddUpdateEmpType">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="EmpTypeCode" Mode="In" Type="String" />
+      <Parameter Name="EmpTypeName" Mode="In" Type="String" />
+      <Parameter Name="EmpTypeStatus" Mode="In" Type="String" />
+      <Parameter Name="StatusCode" Mode="InOut" Type="Int32" />
+      <Parameter Name="StatusMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddUpdateLeaveType">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="LeaveTypeCode" Mode="In" Type="String" />
+      <Parameter Name="LeaveTypeName" Mode="In" Type="String" />
+      <Parameter Name="LeaveTypeStatus" Mode="In" Type="String" />
+      <Parameter Name="StatusCode" Mode="InOut" Type="Int32" />
+      <Parameter Name="StatusMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddUpdateRoles">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="RoleCode" Mode="In" Type="String" />
+      <Parameter Name="RoleName" Mode="In" Type="String" />
+      <Parameter Name="RoleStatus" Mode="In" Type="String" />
+      <Parameter Name="StatusCode" Mode="InOut" Type="Int32" />
+      <Parameter Name="StatusMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmpTypesListById" ReturnType="Collection(PaoniaModel.GetEmpTypesListById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetLeaveTypesListById" ReturnType="Collection(PaoniaModel.GetLeaveTypesListById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetRolesListById" ReturnType="Collection(PaoniaModel.GetRolesListById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EmployeeLeaf">
     <Key>
@@ -198,5 +237,71 @@
     <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeInfoById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="DateofBirth" Nullable="true" />
+    <Property Type="Int32" Name="Age" Nullable="true" />
+    <Property Type="DateTime" Name="JoiningDate" Nullable="true" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PersonalEmailID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CompanyEmailID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactNumber" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="EmergencyContactRelation" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EmployeeType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="IsActive" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <EntityType Name="EmployeeType">
+    <Key>
+      <PropertyRef Name="EmpTypeCode" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpTypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmpTypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EmpTypeStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeCode" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveTypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeaveTypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LeaveTypeStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="RoleStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="GetEmpTypesListById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="EmpTypeCode" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EmpTypeName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="EmpTypeStatus" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="GetLeaveTypesListById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="LeaveTypeCode" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LeaveTypeName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="LeaveTypeStatus" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="GetRolesListById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="RoleCode" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="RoleStatus" Nullable="true" MaxLength="255" />
   </ComplexType>
 </Schema>

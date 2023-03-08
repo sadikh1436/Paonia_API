@@ -179,7 +179,13 @@
     <Compile Include="Databse\EmployeeLeaf.cs">
       <DependentUpon>Paonia_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Databse\EmployeeType.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Databse\GetAllEmployees_Result.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databse\GetEmployeeInfoById_Result.cs">
       <DependentUpon>Paonia_db.tt</DependentUpon>
     </Compile>
     <Compile Include="Databse\GetEmployeeLeavesListByEmpId_Result.cs">
@@ -188,7 +194,19 @@
     <Compile Include="Databse\GetEmployeeLeavesListById_Result.cs">
       <DependentUpon>Paonia_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Databse\GetEmpTypesListById_Result.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Databse\GetLeaveReceiverList_Result.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databse\GetLeaveTypesListById_Result.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databse\GetRolesListById_Result.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Databse\LeaveType.cs">
       <DependentUpon>Paonia_db.tt</DependentUpon>
     </Compile>
     <Compile Include="Databse\Login_Result.cs">
@@ -211,6 +229,9 @@
     </Compile>
     <Compile Include="Databse\RequestObj.cs" />
     <Compile Include="Databse\ResponseObj.cs" />
+    <Compile Include="Databse\Role.cs">
+      <DependentUpon>Paonia_db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Databse\User.cs">
       <DependentUpon>Paonia_db.tt</DependentUpon>
     </Compile>

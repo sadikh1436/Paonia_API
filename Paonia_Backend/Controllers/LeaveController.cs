@@ -32,7 +32,7 @@ namespace Paonia_Backend.Controllers
         {
             try
             {
-                var result = datamodel.EmployeeLeaveRequest(leavereq.Id, leavereq.firstName, leavereq.middleName, leavereq.lastname, leavereq.EmployeeId, leavereq.SenderEmailID, leavereq.Password, leavereq.PhoneNumber,
+                var result = datamodel.EmployeeLeaveRequest(leavereq.Id, leavereq.EmployeeId, leavereq.SenderEmailID, leavereq.Password, leavereq.PhoneNumber,
                 leavereq.ReceiverName, leavereq.ReceiverEmailID, leavereq.LeaveStart, leavereq.LeaveEnd, leavereq.LeaveType, leavereq.Description, leavereq.Status);
 
                 var sc = Convert.ToInt32(result.StatusCode);

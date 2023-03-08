@@ -17,6 +17,33 @@
     <Property Name="Description" Type="varchar" MaxLength="255" />
     <Property Name="Status" Type="varchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="EmployeeType">
+    <Key>
+      <PropertyRef Name="EmpTypeCode" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmpTypeName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="EmpTypeStatus" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="LeaveTypeCode" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeaveTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LeaveTypeName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="LeaveTypeStatus" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="RoleStatus" Type="varchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="EmployeeId" />
@@ -92,8 +119,35 @@
     <Parameter Name="StatusCode" Type="int" Mode="InOut" />
     <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
   </Function>
+  <Function Name="AddUpdateEmpType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="EmpTypeCode" Type="varchar" Mode="In" />
+    <Parameter Name="EmpTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="EmpTypeStatus" Type="varchar" Mode="In" />
+    <Parameter Name="StatusCode" Type="int" Mode="InOut" />
+    <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="AddUpdateLeaveType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="LeaveTypeCode" Type="varchar" Mode="In" />
+    <Parameter Name="LeaveTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="LeaveTypeStatus" Type="varchar" Mode="In" />
+    <Parameter Name="StatusCode" Type="int" Mode="InOut" />
+    <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="AddUpdateRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="RoleCode" Type="varchar" Mode="In" />
+    <Parameter Name="RoleName" Type="varchar" Mode="In" />
+    <Parameter Name="RoleStatus" Type="varchar" Mode="In" />
+    <Parameter Name="StatusCode" Type="int" Mode="InOut" />
+    <Parameter Name="StatusMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
   <Function Name="GetAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeInfoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetEmployeeLeavesListByEmpId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
@@ -101,8 +155,17 @@
   <Function Name="GetEmployeeLeavesListById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetEmpTypesListById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetLeaveReceiverList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Designation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetLeaveTypesListById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetRolesListById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmployeeId" Type="varchar" Mode="In" />
@@ -110,6 +173,9 @@
   </Function>
   <EntityContainer Name="PaoniaModelStoreContainer">
     <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeaves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeType" EntityType="Self.EmployeeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__EmployeeL__Emplo__4BAC3F29" Association="Self.FK__EmployeeL__Emplo__4BAC3F29">
       <End Role="Users" EntitySet="Users" />

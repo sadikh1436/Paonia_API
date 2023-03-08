@@ -147,5 +147,93 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeInfoById" FunctionName="PaoniaModel.Store.GetEmployeeInfoById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaoniaModel.GetEmployeeInfoById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="PersonalEmailID" ColumnName="PersonalEmailID" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="CompanyEmailID" ColumnName="CompanyEmailID" />
+          <ScalarProperty Name="EmergencyContactName" ColumnName="EmergencyContactName" />
+          <ScalarProperty Name="EmergencyContactNumber" ColumnName="EmergencyContactNumber" />
+          <ScalarProperty Name="EmergencyContactRelation" ColumnName="EmergencyContactRelation" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="EmployeeTypes">
+      <EntityTypeMapping TypeName="PaoniaModel.EmployeeType">
+        <MappingFragment StoreEntitySet="EmployeeType">
+          <ScalarProperty Name="EmpTypeStatus" ColumnName="EmpTypeStatus" />
+          <ScalarProperty Name="EmpTypeName" ColumnName="EmpTypeName" />
+          <ScalarProperty Name="EmpTypeCode" ColumnName="EmpTypeCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaveTypes">
+      <EntityTypeMapping TypeName="PaoniaModel.LeaveType">
+        <MappingFragment StoreEntitySet="LeaveType">
+          <ScalarProperty Name="LeaveTypeStatus" ColumnName="LeaveTypeStatus" />
+          <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+          <ScalarProperty Name="LeaveTypeCode" ColumnName="LeaveTypeCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="PaoniaModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleStatus" ColumnName="RoleStatus" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddUpdateEmpType" FunctionName="PaoniaModel.Store.AddUpdateEmpType" />
+    <FunctionImportMapping FunctionImportName="AddUpdateLeaveType" FunctionName="PaoniaModel.Store.AddUpdateLeaveType" />
+    <FunctionImportMapping FunctionImportName="AddUpdateRoles" FunctionName="PaoniaModel.Store.AddUpdateRoles" />
+    <FunctionImportMapping FunctionImportName="GetEmpTypesListById" FunctionName="PaoniaModel.Store.GetEmpTypesListById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaoniaModel.GetEmpTypesListById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmpTypeCode" ColumnName="EmpTypeCode" />
+          <ScalarProperty Name="EmpTypeName" ColumnName="EmpTypeName" />
+          <ScalarProperty Name="EmpTypeStatus" ColumnName="EmpTypeStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetLeaveTypesListById" FunctionName="PaoniaModel.Store.GetLeaveTypesListById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaoniaModel.GetLeaveTypesListById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LeaveTypeCode" ColumnName="LeaveTypeCode" />
+          <ScalarProperty Name="LeaveTypeName" ColumnName="LeaveTypeName" />
+          <ScalarProperty Name="LeaveTypeStatus" ColumnName="LeaveTypeStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRolesListById" FunctionName="PaoniaModel.Store.GetRolesListById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaoniaModel.GetRolesListById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleStatus" ColumnName="RoleStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
